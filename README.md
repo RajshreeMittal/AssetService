@@ -10,8 +10,8 @@ The AssetService is a .NET application used to manage assets and their associate
 
 ## Getting Started
 
--- Attached docker-compose.yaml for the connectivity of assetservice,sql server instance and redis
--- Pull the docker image for assetservice command - docker pull rajshreemittalnagarro/assetservice:1.1
--- Run the docker-compose.yaml so that sql server and redis can be connected within same network
--- Check with docker ps
--- Hit localhost:8080/api/asset for all asset related apis
+- Attached docker-compose.yaml for the connectivity of assetservice,sql server instance and redis
+- Pull the docker image for assetservice command - docker pull rajshreemittalnagarro/assetservice:1.1
+- Run the docker-compose.yaml so that sql server and redis can be connected within same network
+- Check with docker ps
+- Hit localhost:8080/api/asset for all asset related apis
