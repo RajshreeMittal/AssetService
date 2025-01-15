@@ -1,0 +1,49 @@
+services:
+  assetservice:
+    image: rajshreemittalnagarro/assetservice:1.1
+    container_name: myassetservice
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Initial Catalog=AssetManagement;User Id=sa;Password=Nagarro@123;TrustServerCertificate=True;
+      - ConnectionStrings__Redis=cache:6379
+  
+    ports:
+      - "8080:8080"
+      - "443:443"
+    depends_on:
+      - sqlserver
+      - cache
+    networks:
+      - app-network
+    command: ["/wait-for-it.sh", "sqlserver:1433", "--", "dotnet", "AssetService.dll"]
+    
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Nagarro@123
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "1433"]
+      interval: 30s
+      retries: 3
+      timeout: 20s
+      start_period: 5s
+
+  cache:
+    image: redis
+    container_name: redis-server
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+    
+
+  
+
+networks:
+  app-network:
+    driver: bridge
