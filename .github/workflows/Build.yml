@@ -32,6 +32,5 @@ jobs:
     - name: Push Docker image
       run: |
         docker tag assetservice:${{ github.sha }} rajshreemittalnagarro/assetservice:latest
-        docker push assetservice:${{ github.sha }}
         docker push rajshreemittalnagarro/assetservice:latest
 
